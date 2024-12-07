@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        bebas: ['"Bebas Neue"', 'cursive'], // Add the font with a fallback
+      },
+    },
   },
   plugins: [],
 }
