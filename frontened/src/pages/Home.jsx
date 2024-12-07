@@ -7,6 +7,7 @@ import image3 from '../../public/images/image-2.jpg'
 import image4 from '../../public/images/image-3.jpg'
 import image5 from '../../public/images/image-5.jpg'
 import { CiCirclePlus } from "react-icons/ci";
+import banner1 from '../../public/images/image-6.png'
 // import image6 from '../../public/images/image-6.jpg'
 
 const Home = () => {
@@ -15,7 +16,7 @@ const Home = () => {
    
     <div className='container md:flex-row flex flex-col md:mt-0 mt-10 md:p-16 p-10  justify-center'>
     
-        <div className='left md:p-10'>
+        <div className='left md:p-10 m-auto'>
             <div className="m-4 heading-text md:p-10 md:text-7xl  text-4xl gap-2 text-gray-600 font-bold flex flex-row md:flex-col md:gap-10">
               {/* < className='flex'> */}
               <p>Customized</p>
@@ -58,7 +59,7 @@ const Home = () => {
               </div>
 
               <div className="box-2">
-              <img src={image2} className='md:w-80 object-cover h-96 md:h-80' alt="" />
+              <img src={image2} className='md:w-80 md:object-cover w-full h-full md:h-80' alt="" />
                 </div>
 
                 <div className="box-3">
@@ -74,7 +75,7 @@ const Home = () => {
 
 
                   <div className="box-4">
-                  <img src={image4} className='md:w-80 object-cover md:h-72' alt="" />
+                  <img src={image4} className='md:w-80 w-full h-72 object-cover  md:h-72' alt="" />
               </div>
 
               <div className="box-5">
@@ -82,10 +83,10 @@ const Home = () => {
                 </div>
 
                 <div className="box-6">
-                <img src={image4} className='md:w-80 w-full md:h-72' alt="" />
+                <img src={image4} className='md:w-80 w-full h-72 object-cover md:h-72' alt="" />
                 </div>
 
-                  <div className="box-7 flex flex-col justify-center m-auto items-center">
+                  <div className="box-7 flex flex-col justify-center m-auto p-20 items-center">
                     <div className='text-8xl'>
                         <CiCirclePlus />
                     </div>
@@ -96,6 +97,21 @@ const Home = () => {
             </div>
           </div>
     </div>
+    {/* PART - 2*/}
+            <div className='smallBanner md:m-0 '>
+                <div className=' m-auto  bg-gray-200 md:flex-row flex flex-col md:gap-10 gap-16 justify-center items-center '>
+                      <div className="text p-5 md:order-2 text-center md:text-start flex flex-col gap-10">
+                            <h1 className='text-5xl mt-10 text-red-500'>#ColorOfTheMonth</h1>
+                            <p className='md:w-[550px] text-gray-400  md:text-2xl'>Lorem ipsum dolor sit amet consectetur aimos odit doloremque quia architecto inventore ipsa harum odio officiis. Minus, laboriosam maxime eum et quas facilis? </p>
+                            <p className='text-4xl'>Just $35!!!</p>
+                      </div>
+
+                      <div className="image md:order-1 md:mt-4">
+                          <img src={banner1} alt="" className='md:w-fit w-80  md:h-96' />
+                      </div>
+
+                </div>  
+            </div>
     </>
   )
 }
