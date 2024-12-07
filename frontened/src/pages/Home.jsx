@@ -17,7 +17,7 @@ const Home = () => {
     <div className='container md:flex-row flex flex-col md:mt-0 mt-10 md:p-16 p-10  justify-center'>
     
         <div className='left md:p-10 m-auto'>
-            <div className="m-4 heading-text md:p-10 md:text-7xl  text-4xl gap-2 text-gray-600 font-bold flex flex-row md:flex-col md:gap-10">
+            <div className="m-4 heading-text md:p-10 md:text-7xl  text-4xl gap-2 text-gray-600 font-semibold flex flex-row md:flex-col md:gap-10">
               {/* < className='flex'> */}
               <p>Customized</p>
 
@@ -109,7 +109,6 @@ const Home = () => {
                       <div className="image md:order-1 md:mt-4">
                           <img src={banner1} alt="" className='md:w-fit w-80  md:h-96' />
                       </div>
-
                 </div>  
             </div>
     </>
