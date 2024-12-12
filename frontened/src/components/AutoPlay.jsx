@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import {useInView} from 'react-intersection-observer';
 
-const AutoPlay = ({src,width,height}) => {
+const AutoPlay = ({src}) => {
     const videoRef = useRef(null);
     const {ref,inView } = useInView({
         threshold:0.2,
@@ -20,15 +20,13 @@ React.useEffect(() => {
 },[inView]);
 
   return (
-    <div ref={ref} style={{width,height}}>
+    <div ref={ref} className='md:h-[500px] object-cover'>
         <video src={src}
                 ref={videoRef}
                 controls={false}
                 muted
-                width='100%'
-                height='100%'
                 loop
-                className='absolute inset-0 md:rounded-3xl object-cover'
+                className='md:absolute md:w-[100%] md:h-[100%] inset-0 md:rounded-3xl object-cover'
             ></video>
     </div>
   )

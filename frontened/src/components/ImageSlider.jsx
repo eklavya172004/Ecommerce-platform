@@ -1,43 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
 const ImageSlider = ({images,interval=2000}) => {
-    const [currentImage,setImage] = useState(0);
-  
-    useEffect( () =>
-    {
-        const slider = setInterval(() => {
-            setImage((previous) => (previous+1)%images.length);
-        },[interval]);
 
-        return () => clearInterval(slider);
-    },[images.length,interval]);
+  const [currentIndex,setNextIndex] = useState(0);
 
-    const handleEnd = () => {
-      if(currentImage == images.length - 1){
-        setTimeout(() => {
-          setImage(0);
-        },10);
-      }
-    }
+  useEffect(() => {
+    const sldier = setInterval(() => {
+      setNextIndex((prev) => (prev+1) % images.length);
+    },interval);
+    
+      return () => clearInterval(sldier);
+  },[interval]);
 
   return (
-    <div className='flex overflow-hidden'>
-      <div className='flex transition-transform w-full h-52 '
-            style={{
-              transform: `translateX(${currentImage*100}%)`,
-            }}
-            onTransitionEnd={handleEnd}
-      >
-      {
-        images.map((image,index) => (
-          <img src={image}
-                key={index}
-                className='w-[400px] h-full object-cover flex-shrink-0'          
-                />
-        ))
-      }
-
-      </div>
+    <div className='relative w-full'>
+        <div className='w-full md:h-[500px] overflow-hidden'>
+            <img src={images[currentIndex]} alt="" className='w-full h-full object-cover'/>
+        </div>
     </div>
   )
 }

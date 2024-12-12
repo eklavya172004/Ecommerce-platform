@@ -198,25 +198,23 @@ const Home = () => {
                     {/* video section */}
             </div>
                         <div className='md:text-5xl text-center mb-10  text-xl font-extrabold'>Make you own fashion</div>
-            <div className='flex relative flex-col md:gap-20 gap-10 justify-center md:w-[90%] m-auto items-left p-10'>
+            <div className='flex relative p-10 flex-col md:gap-20 gap-10 justify-center md:w-[90%] m-auto items-left '>
                      <AutoPlay 
                       src={video}
-                      width="100%"
-                      height="800px"
                      />
                       <p className='absolute text-3xl inset-0 items-center justify-center'>hello sister</p>
             </div>
 
-            <div className='mugPage p-5 md:p-20'>
-                    <div className='md:flex-row justify-between flex flex-col bg-none'>
-                          <div className='text flex flex-col '>
-                                 <h1 className='text-4xl font-extrabold'>Hundreds Of Ready Designs To Choose From</h1> 
-                                  <p className='text-base text-gray-500 roboto-medium  font-light'>Nam at congue diam etiam erat lectus, finibus eget commodo quis, congue diam etiam erat lectus.</p>
-                                  <p className='border-2 mt-10 border-l-0 flex border-gray-600  gap-2 justify-left items-center  w-[40%] p-4 text-2xl text-gray-500'><FaAngleDoubleRight /> <p>
+            <div className='mugPage p-5 md:mt-40 md:p-20 m-auto w-[90%]'>
+                    <div className='md:flex-row  items-start justify-between flex flex-col bg-none'>
+                          <div className='text flex flex-col gap-7 mt-20'>
+                                 <h1 className='md:text-5xl text-xl w-[80%]  text-gray-500 '>Hundreds Of Ready Designs To Choose From</h1> 
+                                  <p className=' w-[90%] text-gray-500 lato-regular md:text-xl text-sm font-light'>Nam at congue diam etiam erat lectus, finibus eget commodo quis, congue diam etiam erat lectus.</p>
+                                  <p className='border-2 md:mt-10 mb-10 border-l-0 flex border-gray-500 p-2 gap-2  justify-left items-center  w-[60%] md:w-[30%] md:p-2 text-lg md:text-xl text-gray-500'><FaAngleDoubleRight /> <p>
                                   EXPLORE DESIGNS</p></p>
                           </div>
 
-                          <div className='image h-52'>
+                          <div className='image md:w-[60%]   h-full'>
                                 <ImageSlider images={images}/>
                           </div>
                     </div>
