@@ -3,11 +3,11 @@ import image from '../assets/Main.png'
 import { FaAngleDoubleRight } from "react-icons/fa";
 import image1 from '/images/image-0.jpg'
 import image2 from '/images/image-1.jpg'
-import image3 from '../../public/images/image-2.jpg'
-import image4 from '../../public/images/image-3.jpg'
-import image5 from '../../public/images/image-5.jpg'
+import image3 from '/images/image-2.jpg'
+import image4 from '/images/image-3.jpg'
+import image5 from '/images/image-5.jpg'
 import { CiCirclePlus } from "react-icons/ci";
-import banner1 from '../../public/images/image-6.png'
+import banner1 from '/images/image-6.png'
 import { Context } from '../context/Context';
 import Title from '../components/Title';
 import Productitem from '../components/Productitem';
@@ -214,7 +214,7 @@ const Home = () => {
                                   EXPLORE DESIGNS</p></p>
                           </div>
 
-                          <div className='image md:w-[60%]   h-full'>
+                          <div className='image md:w-[60%] h-full'>
                                 <ImageSlider images={images}/>
                           </div>
                     </div>

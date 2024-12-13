@@ -1,6 +1,6 @@
 // import React from 'react'
 import logo from '../assets/logo.png'
-import {NavLink, Route, useNavigate} from 'react-router-dom'
+import {Link, NavLink, Route, useLocation, useNavigate} from 'react-router-dom'
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -18,6 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from 'react';
 
 // import image from './../assets/'
 
@@ -25,6 +26,12 @@ const Navbar = () => {
   const [state, setState] = React.useState({
     right: false,
   });
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isSearchOn,setSearch] = useState(false);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -68,9 +75,6 @@ const Navbar = () => {
           </Box>
   );
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -85,15 +89,15 @@ const Navbar = () => {
   } 
 
   return (
-    <div className='flex  items-center justify-between '>
+    <div className='flex   items-center justify-between '>
         <div className="logo p-5 ml-5">
-            <img src={logo} alt="" className='w-32'/>
+            <Link to='/'><img src={logo} alt="" className='w-32'/></Link>
         </div>
   
-        <div className='flex justify-center items-center gap-5'>
+        <div className='flex justify-center  items-center '>
 
         <div className="pages hidden md:block mr-10">
-            <ul className='flex items-center gap-14'>
+            <ul className={` transition-all  items-center gap-14 flex`}>
               <NavLink to='/' className= { ({isActive}) => isActive ? 'text-red-500 font-semibold' : 'text-gray-500 font-semibold'}><p>Home</p>
               {/* <hr className={`transition-all duration-300 ease-in-out bg-gray-500 h-1  hidden`}/> */}
 
@@ -141,6 +145,21 @@ const Navbar = () => {
               {/* </NavLink> */}
             </ul>
         </div>
+
+        {/* Search bar functinality */}
+
+        {location.pathname === '/AllProducts' && (
+           <div className="search-bar hidden md:flex  items-center">
+           <input
+             type="text"
+             placeholder="Search products..."
+             className={`border border-gray-300 font-serif transition-all duration-500 ease-in-out rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500
+              ${isSearchOn ? ' w-96' : ' w-80'}  `}
+              onFocus={() => setSearch(true)}
+              onBlur={() => setSearch(false)}
+           />
+         </div>
+        )}
 
         <div className="cart p-2 mr-6 gap-1 flex justify-center  items-center">
             {/* <img src={} alt="" />

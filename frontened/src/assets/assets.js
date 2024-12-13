@@ -211,7 +211,8 @@ export const products = [
         subCategory: "Women Bottomwear",
         sizes: ["M", "L", "XL"],
         date: 1716621542458,
-        bestseller: false
+        bestseller: false,
+        topDeal: true,
     },
     {
         _id: "aaaars",
@@ -223,7 +224,8 @@ export const products = [
         subCategory: "Men Bottomwear",
         sizes: ["S", "M", "L"],
         date: 1716621542459,
-        bestseller: false
+        bestseller: false,
+        topDeal: true,
     },
     {
         _id: "aaaatt",
@@ -247,7 +249,8 @@ export const products = [
         subCategory: "Men Bottomwear",
         sizes: ["S", "M", "L"],
         date: 1716621542461,
-        bestseller: false
+        bestseller: false,
+        topDeal: true,
     },
     {
         _id: "aaabvj",
@@ -272,5 +275,18 @@ export const products = [
         sizes: ["S", "M", "L"],
         date: 1716621542463,
         bestseller: true
-    }
+    },
+    {
+        _id: "aaabfz",
+        name: "Women Denim Overalls",
+        description: "Chic denim overalls, ideal for a casual and stylish look.",
+        price: 250,
+        image: [image2],
+        category: "overalls",
+        subCategory: "Women Casualwear",
+        sizes: ["S", "M", "L"],
+        date: 1716621542465,
+        topDeal: true, // Added to top deals
+    },
+
 ];
