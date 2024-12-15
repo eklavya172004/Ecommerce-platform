@@ -1,31 +1,63 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { Context } from '../context/Context';
 import { Link } from 'react-router-dom';
 
-const Bestsellers = ({products}) => {
+const Bestsellers = ({ products }) => {
 
-  const bestsellers = products.filter((best) => best.bestseller);
-  const {ruppeeSign} = useContext(Context);
+  const bestsellersMen = products.filter((best) => best.bestseller && best.subCategory.includes("Men"));
+
+  const bestsellerWomen = products.filter((best) => best.bestseller && best.subCategory.includes("Women"));
+
+  const bestsellerKids = products.filter((best) => best.bestseller && best.subCategory.includes("Kids"));
+
+  const bestsellerElectronics = products.filter((best) => best.bestseller && best.subCategory.includes("electronics"))
+
+  const { ruppeeSign } = useContext(Context);
+
+  const renderSection = (title,products) => (
+    <div className="p-5 flex flex-col gap-6">
+    {/* Header */}
+    <h1 className="text-3xl font-semibold text-gray-800 text-center sm:text-left">
+      {title}
+    </h1>
+
+    {/* Product Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {products.map((product) => (
+        <Link
+          key={product._id}
+          className="bg-white shadow-md  rounded-lg overflow-hidden transition-transform transform hover:scale-105 cursor-pointer"
+          to={`/product/${product._id}`}
+        >
+          <div className="flex flex-col items-center ">
+            {/* Product Image */}
+            <img
+              className="w-full h-56  object-cover group-hover:opacity-90 transition-opacity duration-300"
+              src={product.image}
+              alt={product.name}
+            />
+            {/* Product Name */}
+            <p className="text-lg font-bold  text-gray-700">{product.name}</p>
+            {/* Product Price */}
+            <p className="text-md font-medium text-gray-600 mt-2">
+              {ruppeeSign}
+              {product.price}
+            </p>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </div>
+  )
 
   return (
-    <div className='p-5 flex flex-col gap-3'>
-          <h1 className='text-2xl text-gray-500'>BestSellers</h1>
+      <div>
+        {bestsellersMen.length>0 && renderSection("BestSellers in Men's Collection",bestsellersMen)}
+        {bestsellerWomen.length>0 && renderSection("BestSellers in Women's Collection" ,bestsellerWomen)}
+        {bestsellerKids.length>0 && renderSection("BestSeller in Kids",bestsellerKids)}
+        {bestsellerElectronics.length>0 && renderSection("BestSellers in Electronics",bestsellerElectronics)}
+      </div>
+  );
+};
 
-            <div className='flex gap-5 justify-center items-center'>
-              {bestsellers.map((products) => (
-
-                  <Link className='text-gray-600 cursor-pointer' to={`/product/${products._id}`}>
-                        <div className='overflow-hidden flex flex-col text-center'>
-                          <img className='w-50 h-50 hover:scale-100 transition ease-in-out' src={products.image} alt="" />
-                            <p className='text-xl font-bold text-gray-600'>{products.name}</p>
-                              <p className='text-sem font-medium'>{ruppeeSign}{products.price}</p>
-                        </div>  
-                    </Link>
-
-              ))}
-            </div>
-    </div>
-  )
-}
-
-export default Bestsellers
+export default Bestsellers;

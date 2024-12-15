@@ -23,8 +23,8 @@ const Home = () => {
   const [pants,setPantProducts] = useState([]);
   
   useEffect(()=> {
-    setShirtProducts(products.filter((item) => item.category === "shirts").slice(0,5));
-    setPantProducts(products.filter((item) => item.category === "pants").slice(0,5));
+    setShirtProducts(products.filter((item) => item.category === "shirts").slice(0,4));
+    setPantProducts(products.filter((item) => item.category === "pants").slice(0,4));
   },[products]);
 
   const displayProduct = selecteditem === "shirts" ? shirts : pants;
@@ -182,16 +182,10 @@ const Home = () => {
                     <div className='products flex flex-col text-left'>
                           {/* <p className='font-bold text-xl p-5'>{selecteditem === "shirts" ? "shirts" : "pants"}</p> */}
                               <div className='p-5 flex flex-col md:flex-row gap-5'>
-                                    {
-                                      displayProduct.map((item,index) => (
-                                          <Productitem key={index}
-                                           id={item._id}
-                                            name={item.name}
-                                              price={item.price}
-                                              image={item.image}
+                                    
+  
+                                          <Productitem products={ displayProduct}
                                                />
-                                      ))
-                                    }
                               </div>
                     </div>
 
