@@ -33,11 +33,14 @@ const Bestsellers = ({ products }) => {
             {/* Product Image */}
             <img
               className="w-full h-56  object-cover group-hover:opacity-90 transition-opacity duration-300"
-              src={product.image}
+              src={product.image[0]}
               alt={product.name}
             />
             {/* Product Name */}
             <p className="text-lg font-bold  text-gray-700">{product.name}</p>
+            {/* Product rating */}
+            <p className="text-lg font-bold  text-gray-700">Rating:{product.rating}</p>            
+
             {/* Product Price */}
             <p className="text-md font-medium text-gray-600 mt-2">
               {ruppeeSign}

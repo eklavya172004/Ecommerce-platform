@@ -16,7 +16,7 @@ const Productitem = ({ products }) => {
           <div className="flex flex-col items-center text-center bg-white shadow-lg rounded-lg p-4 transition-all hover:scale-105 transform duration-300">
             <img
               className="w-full h-56 object-cover rounded-lg mb-4 transition-all ease-in-out hover:scale-105"
-              src={product.image}
+              src={product.image[0]}
               alt={product.name}
             />
             <p className="text-xl font-bold text-gray-800 truncate">{product.name}</p>

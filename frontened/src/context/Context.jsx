@@ -3,7 +3,6 @@ import { products } from "../assets/assets";
 
 export const Context = createContext();
 
-
 const ContextProvider =(props) => {
 
     const ruppeeSign = '₹';
