@@ -106,8 +106,35 @@ export const products = [
       "subCategory": "Men Topwear",
       "sizes": ["M", "L", "XL"],
       "date": 1716621345448,
-      "bestseller": true
-    },
+      "bestseller": true,
+      "features": [
+        "Made from 100% pure cotton for a soft feel",
+        "Breathable and lightweight fabric",
+        "Ideal for casual wear or as an undershirt",
+        "Available in multiple sizes: M, L, XL",
+        "Durable and machine washable"
+      ],
+      "reviews": [
+        {
+          "user": "John Doe",
+          "rating": 4,
+          "comment": "Great quality t-shirt. The fabric is soft and breathable. Worth the price.",
+          "date": "2024-12-01"
+        },
+        {
+          "user": "Jane Smith",
+          "rating": 2,
+          "comment": "The size was a bit small for me, but the fabric feels good.",
+          "date": "2024-12-05"
+        },
+        {
+          "user": "Alex Johnson",
+          "rating": 3,
+          "comment": "The t-shirt is fine, but it shrunk a little after the first wash.",
+          "date": "2024-12-10"
+        }
+      ]
+    },    
     {
       "_id": "aaaac",
       "rating": 2,
