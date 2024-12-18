@@ -34,6 +34,50 @@ const ContextProvider =(props) => {
             setCartItems(updateproduct);
     }
 
+    const removefromCart = async (id,size) => {
+        if(!cartItems[id] && !cartItems[id][size]){
+            toast.error("This product is not in your cart!");
+            return;
+        }
+
+        let updatecart = structuredClone(cartItems);
+
+        updatecart[id][size] -=1;
+        
+        if (updatecart[id][size] <= 0) {
+            delete updatecart[id][size];
+          }
+        
+          // If the product no longer has any sizes, deleting the product key
+          if (Object.keys(updatecart[id]).length === 0) {
+            delete updatecart[id];
+          }
+        
+
+        setCartItems(updatecart);
+
+        // toast.success("Items has been removed from the cart!😊");
+    }
+
+    const totalamount = ()=> {
+        let amount = 0;
+
+        for(const items in cartItems){
+            let itemsinfo = products.find((product) => product._id === items);
+            for(const item in cartItems[items]){
+                    try {
+                        if(cartItems[items][item]>0){
+                            amount += itemsinfo.price*cartItems[items][item];
+                        }
+                    } catch (error) {
+                        
+                    }
+            }
+        }
+
+        return amount;
+    }
+
     const countCart = () => {
         let count=0;
         try {
@@ -52,11 +96,11 @@ const ContextProvider =(props) => {
     }
 
     useEffect(() => {
-        // console.log(countCar);
+        console.log(cartItems);
     },[cartItems]);
 
     const value = {
-        products,ruppeeSign,delivery_charges,cartItems,addtocart,countCart
+        products,ruppeeSign,delivery_charges,cartItems,addtocart,countCart,removefromCart,totalamount
     }
 
     return <Context.Provider value={value}>

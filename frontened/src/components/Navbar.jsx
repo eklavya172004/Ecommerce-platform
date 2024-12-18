@@ -49,7 +49,7 @@ const Navbar = () => {
     { text: 'All Products', route: '/AllProducts' },
     { text: 'About', route: '/About' },
     { text: 'Contact', route: '/Contact' },
-    { text: 'Orders', route: '/Orders' },
+    { text: 'Orders', route: '/Cart' },
     { text: 'My Profile', route: '/Account' },
     { text: 'Add to Cart', route: '/Cart' },
   ];
