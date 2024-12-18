@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 const Bestsellers = ({ products }) => {
 
-  const bestsellersMen = products.filter((best) => best.bestseller && best.subCategory.includes("Men"));
+  const bestsellersMen = products.filter((best) => best.bestseller && best.category.includes("Men"));
 
-  const bestsellerWomen = products.filter((best) => best.bestseller && best.subCategory.includes("Women"));
+  const bestsellerWomen = products.filter((best) => best.bestseller && best.category.includes("Women"));
 
-  const bestsellerKids = products.filter((best) => best.bestseller && best.subCategory.includes("Kids"));
+  const bestsellerKids = products.filter((best) => best.bestseller && best.category.includes("Kids"));
 
-  const bestsellerElectronics = products.filter((best) => best.bestseller && best.subCategory.includes("electronics"))
+  const bestsellerElectronics = products.filter((best) => best.bestseller && best.category.includes("Electronics"))
 
   const { ruppeeSign } = useContext(Context);
 

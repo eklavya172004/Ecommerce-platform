@@ -1,20 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Context } from '../context/Context';
 import { FaStar } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import startimage from '/images/star_icon.png'
 import { FiMapPin } from 'react-icons/fi';
 import stardull from '/images/star_dull_icon.png'
+import RelatedProducts from '../components/RelatedProducts';
 
 const Product = () => {
 
   const {id} = useParams();
-  const {products,ruppeeSign,delivery_charges} = useContext(Context);
+  const {products,ruppeeSign,delivery_charges,addtocart} = useContext(Context);
   const [productdata,setProductData] = useState(false);
   const [image,setImage] = useState('');
   const [selectSize,setSize] = useState('');
   const [active,setActive] = useState('');
+  const navigate = useNavigate();
 
   const fetchData = async () => {
       
@@ -22,7 +24,7 @@ const Product = () => {
             if(data._id === id){
               setProductData(data);
               setImage(data.image[0])
-              console.log(data);
+              // console.log(data);
               return null;
             }    
       });
@@ -31,6 +33,13 @@ const Product = () => {
   useEffect(() => {
     fetchData();
   },[id,products]);
+
+  const handlebuynow = () =>{
+    addtocart(productdata._id,selectSize);
+    if(selectSize){
+    navigate('/Cart');
+  }
+  }
 
 
   return productdata ?  (   
@@ -84,16 +93,16 @@ const Product = () => {
                       <p>Select Size</p>
                       <div className='flex gap-2'>
                           {productdata.sizes.map((size,index) => (
-                            <button key={index} onClick={() => setSize(size)} className={`border py-2 px-3 bg-gray-300 text-black ${size===selectSize ? 'border-blue-400':'border-white'}`}>{size}</button> 
+                            <button key={index} onClick={() => setSize(size === selectSize ? '' : size)} className={`border-2 py-2 px-4 bg-gray-300 text-black ${size===selectSize ? 'border-blue-400':'border-white'}`}>{size}</button> 
                           ))}
                       </div>
                       
 
                   <div className='addToCart flex gap-4 mt-5 md:justify-start md:mr-0 mr-2'>
-                        <button className='AddToCart roboto-bold font-bold p-3 rounded-xl w-full text-white  md:w-64 bg-orange-500 text-lg md:text-2xl '>
+                        <button onClick={() => addtocart(productdata._id,selectSize)} className='AddToCart roboto-bold font-bold p-3 rounded-xl w-full text-white  md:w-64 bg-orange-500 text-lg md:text-2xl '>
                             <p>Add to cart</p>
                         </button>
-                        <button className='AddToCart roboto-medium font-bold w-full md:w-64 p-3  rounded-xl bg-whilte border  border-black text-lg md:text-2xl '>
+                        <button onClick={handlebuynow}  className='AddToCart roboto-medium font-bold w-full md:w-64 p-3  rounded-xl bg-whilte border  border-black text-lg md:text-2xl '>
                             <p>Buy Now</p>
                         </button>
                   </div>
@@ -142,14 +151,21 @@ const Product = () => {
             <div className='flex'>
 
             <div className='description'>
-                  <p onClick={() => setActive('description')} className='text-base px-3 py-2 roboto-medium cursor-pointer border border-gray-400 '>Highlights</p>
+                  <p onClick={() => setActive(active === 'description'? '':'description')} className={`${active === 'description' ? 'roboto-bold' :'roboto-regular' } text-base px-4 py-2  cursor-pointer border border-gray-400 `}>Highlights</p>
             </div>
 
             <div className='reviews'>
-                  <div className=''>
-                          <p onClick={() => setActive('reviews')} className='text-base border-l-0 border cursor-pointer roboto-medium border-gray-400 px-3 py-2'>Reviews({productdata.reviews.length})</p>
-                  </div>
-            </div>
+  {productdata.reviews && productdata.reviews.length > 0 && (
+    <div>
+      <p 
+        onClick={() => setActive(active === 'reviews'?'' :'reviews')} 
+        className={`${active === 'reviews' ?'roboto-bold' :'roboto-regular'} text-base border-l-0 border cursor-pointer roboto-medium border-gray-400 px-3 py-2`}
+      >
+        Reviews({productdata.reviews.length})
+      </p>
+    </div>
+  )}
+</div>
 
             </div>
 
@@ -199,7 +215,7 @@ const Product = () => {
           </div>
 
         {/* Related products page*/}
-        
+                          <RelatedProducts category={productdata.category} subcategory={productdata.subCategory}/>
     </div>
   ) : <div className='opacity-0'></div>
 }
