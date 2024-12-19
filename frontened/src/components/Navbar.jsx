@@ -52,6 +52,7 @@ const Navbar = () => {
     { text: 'Orders', route: '/Cart' },
     { text: 'My Profile', route: '/Account' },
     { text: 'Add to Cart', route: '/Cart' },
+    {text:'Login',route:'/Login'}
   ];
 
   const list = (anchor) => (
@@ -87,7 +88,7 @@ const Navbar = () => {
   };
   const gotoAccount = () => {
     console.log('navigating to the account page')
-    navigate('/Account')
+    navigate('/Login')
     handleClose();
   }
   const gotocart = () => {
@@ -144,7 +145,7 @@ const Navbar = () => {
       >
 
         {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-        <MenuItem onClick={gotoAccount}>My account</MenuItem>
+        <MenuItem onClick={gotoAccount}>My Account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
     </div>

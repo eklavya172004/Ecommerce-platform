@@ -15,6 +15,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Login from './pages/Login'
 const App = () => {
   return (
     <div>
@@ -34,6 +35,7 @@ const App = () => {
             <Route path='/placeOrder' element={<PlaceOrder/>} />
             <Route path='/seller' element={<Seller/>} />
             <Route path='/user' element={<User/>}/>
+            <Route path='/Login' element={<Login/>} />
         </Routes>
 
         <Footer/>
