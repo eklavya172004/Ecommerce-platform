@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import connectDB from "./mongodb.js";
-import connectToCloudinary from "./cloudinary.js";
+import connectDB from "./config/mongodb.js";
+import connectToCloudinary from "./config/cloudinary.js";
 
 // const dotenv = require('dotenv');
 dotenv.config({path:'./.env'})
@@ -15,6 +15,8 @@ app.use(express.json());
 connectDB();
 //connecting to the cloudinary
 connectToCloudinary();
+
+app.use('')
 
 app.get('/',(req,res) => {
     res.send('API is working!!');

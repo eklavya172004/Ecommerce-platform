@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from 'validator'
+import bcrypt from 'bcryptjs'
 
 const Userschema = new mongoose.Schema({
     name:{
@@ -38,6 +39,21 @@ const Userschema = new mongoose.Schema({
     passwordResetToken:String,
     passwordResetExpiresAt: Date
 });
+
+    Userschema.methods.correctPassword = async function(candidatepassword,userpassword){
+        return await bcrypt.compare(candidatepassword,userpassword);
+    }
+
+    Userschema.methods.changedPassword = function(JWTTimeStamp){
+        if(this.passwordChangedAt){
+
+            const changedTimeStamp =  parseInt(this.passwordChangedAt.getTime() / 1000,10);
+
+            return JWTTimeStamp < changedTimeStamp;
+        }
+
+        return false;
+    }
 
 const User = mongoose.model('User',Userschema);
 
