@@ -2,11 +2,6 @@ import pkg from 'pg';
 const { Pool } = pkg;
 
 
-// PG_USER=postgres
-// PG_HOST=localhost
-// PG_DATABASE=ecommerce
-// PG_PASSWORD=eklavya17
-// PG_PORT=5432
 const pool = new Pool({
  
 });
