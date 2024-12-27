@@ -3,6 +3,11 @@ import express from "express";
 import cors from "cors";
 import connectDB from "./config/mongodb.js";
 import connectToCloudinary from "./config/cloudinary.js";
+import userRoute from './routes/userroutes.js'
+import productRoute from './routes/productroutes.js'
+import transactionRoute from './routes/transactionroutes.js'
+import sellerRoute from './routes/sellerRoutes.js'
+import reviewRoute from './routes/reviewroutes.js'
 
 // const dotenv = require('dotenv');
 dotenv.config({path:'./.env'})
@@ -16,7 +21,12 @@ connectDB();
 //connecting to the cloudinary
 connectToCloudinary();
 
-app.use('')
+app.use('/api/user',userRoute);
+// app.use('/api/user/seller',userRoute);
+app.use('/api/reviews',reviewRoute);
+app.use('/api/user/seller',sellerRoute);
+app.use('/api/products',productRoute);
+app.use('/api/transactions',transactionRoute);
 
 app.get('/',(req,res) => {
     res.send('API is working!!');

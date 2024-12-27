@@ -1,0 +1,17 @@
+Project Summary: E-Commerce Marketplace with Advanced Features
+This project is a modern, feature-rich e-commerce marketplace application inspired by platforms like Amazon and Myntra. It combines cutting-edge technologies to provide seamless user experiences, robust search capabilities, efficient data management, and scalable performance.
+
+1.Role-based system: Users, Sellers, and Admins.
+2.Product Management:
+Sellers can list and manage their products.
+Products are stored in PostgreSQL for robust relational data management and transaction history of orders and using stripe for payment.
+3.Review System:Reviews can include text and images.
+4.Search Functionality
+5.Real-time chat between users and sellers.
+6.Utilizes Redis to store session data for scalable and fast access.
+7.Handles product images, seller logos, and review images with efficient cloud-based storage.
+8.Tracking user activity like add to carts,wishlists etc..
+9.Admins manage users, sellers, and monitor platform activities.
+
+Technology used:
+Mern stack,UI/UX design, different databases nad building them from scratch,authentication,session management,sockect.io

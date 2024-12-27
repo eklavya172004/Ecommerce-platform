@@ -1,6 +1,6 @@
-import User from './../models/user';
-import Seller from './../models/seller'
-import Admin from './../models/admin'
+import User from './../models/user.js';
+import Seller from './../models/seller.js'
+import Admin from './../models/admin.js'
 import jwt from 'jsonwebtoken'
 
 const signToken = (id,role) => {
@@ -14,19 +14,19 @@ export const login = async (req,res) => {
     try {
         let user;
         
-        if(!email && !password){
+        if(!email || !password){
             return res.status(400).json({
                 message:"Please provide an valid email!"
             })
         }
 
         if(role === 'admin'){
-            user = await Admin.findOne({email}).select('+password');
+            user = await Admin.findOne({email:email}).select('+password');
         }
         else if(role ==='seller'){
-            user = await Seller.findOne({email}).select('password');
+            user = await Seller.findOne({email:email}).select('+password');
         }else{
-            user = await User.findOne({email}).select('password');
+            user = await User.findOne({email:email}).select('+password');
         }
 
         if(!user || !(await user.correctPassword(password,user.password))){
@@ -36,9 +36,15 @@ export const login = async (req,res) => {
         }
         
         const token = signToken(user._id,user.role || "user");
-
+        
+        res.status(200).json({
+            message:"Logged in successfully",
+            token
+        })
+        
     } catch (error) {
-        res.status(500).json({ message: "Error during login", error });
+        // res.status(500).json({ message: "Error during login", error });
+        console.log(error.message);
     }
 }
 
@@ -47,11 +53,28 @@ export const signup = async (req,res) => {
     const {name,email,role,password,passwordConfirmation,storename,storeaddress,storelogo} = req.body;
     
     try {
+
+        let existingUser;
+
+        if (role === "seller") {
+            existingUser = await Seller.findOne({ email });
+        } else if (role === "admin") {
+            return res.status(403).json({ message: "Admins cannot sign-up directly!" });
+        } else {
+            existingUser = await User.findOne({ email });
+        }
+
+        if (existingUser) {
+            return res.status(400).json({
+                message: `A ${role || "user"} with this email already exists. Please use a different email.`,
+            });
+        }
+
         let newUser;
 
         if(role === "seller"){
             //Creating an seller account
-            newUser = new Seller({name,email,role,password,passwordConfirmation,storename,storeaddress,storelogo});
+            newUser = new Seller({userID: req.user.id,email,storename,storeaddress,storelogo});
         }else if(role === "admin"){
             return res.status(403).json({message:"Admins cannot sign-up directly!"});
         }else{
@@ -69,7 +92,8 @@ export const signup = async (req,res) => {
         })
 
     } catch (error) {
-            res.status(500).json({message:"error during sign-up"});
+            res.status(500).json({message:"error during sign-up",error});
+            console.log(error.message);
     }
 }
 

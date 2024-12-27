@@ -41,5 +41,4 @@ const AdminSchema = new mongoose.Schema(
     { timestamps: true } // Automatically add `createdAt` and `updatedAt`
   );
   
-const Admin = mongoose.model("Admin", AdminSchema);
-module.exports = Admin;
+ export default mongoose.model('Admin', AdminSchema);

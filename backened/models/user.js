@@ -13,6 +13,7 @@ const Userschema = new mongoose.Schema({
     email:{
         type:String,
         required:[true,'Email is required'],
+        unique:true,
         validate:[validator.isEmail,'Please provide and valid email'],
         lowercase:true
     },
@@ -20,6 +21,7 @@ const Userschema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,'Password is required'],
+        unique:true,
         minlength: [8, 'Password must be at least 8 characters long'], 
         maxlength: [15, 'Password must be at most 10 characters long'],
     },
@@ -40,11 +42,19 @@ const Userschema = new mongoose.Schema({
     passwordResetExpiresAt: Date
 });
 
+Userschema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next(); // Only hash if password is modified
+    this.password = await bcrypt.hash(this.password, 12); // Hash with 12 rounds of salt
+    this.passwordConfirmation = undefined; // Remove passwordConfirmation after hashing
+    next();
+});
+
+
     Userschema.methods.correctPassword = async function(candidatepassword,userpassword){
         return await bcrypt.compare(candidatepassword,userpassword);
     }
 
-    Userschema.methods.changedPassword = function(JWTTimeStamp){
+    Userschema.methods.changedpassword = function(JWTTimeStamp){
         if(this.passwordChangedAt){
 
             const changedTimeStamp =  parseInt(this.passwordChangedAt.getTime() / 1000,10);
@@ -55,6 +65,4 @@ const Userschema = new mongoose.Schema({
         return false;
     }
 
-const User = mongoose.model('User',Userschema);
-
-module.exports = User;
+    export default mongoose.model('User', Userschema);
