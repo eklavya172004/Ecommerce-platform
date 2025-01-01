@@ -21,6 +21,8 @@ connectDB();
 //connecting to the cloudinary
 connectToCloudinary();
 
+
+
 app.use('/api/user',userRoute);
 // app.use('/api/user/seller',userRoute);
 app.use('/api/reviews',reviewRoute);

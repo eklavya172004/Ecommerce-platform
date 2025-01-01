@@ -55,21 +55,33 @@ export const signup = async (req,res) => {
     try {
 
         let existingUser;
+        let existingSeller;
+
+        existingUser = await User.findOne({ email });
+
 
         if (role === "seller") {
-            existingUser = await Seller.findOne({ email });
-        } else if (role === "admin") {
-            return res.status(403).json({ message: "Admins cannot sign-up directly!" });
-        } else {
-            existingUser = await User.findOne({ email });
-        }
+            existingSeller = await Seller.findOne({ email });
 
-        if (existingUser) {
+        if (existingSeller) {
             return res.status(400).json({
                 message: `A ${role || "user"} with this email already exists. Please use a different email.`,
             });
         }
 
+        if(!existingUser){
+            return res.status(400).json({
+                message: "You need to have a user account before creating a seller account.",
+            });
+        }
+    }
+
+    if (role === "admin") {
+        return res.status(403).json({
+            message: "Admins cannot sign up directly!",
+        });
+    }
+    
         let newUser;
 
         if(role === "seller"){

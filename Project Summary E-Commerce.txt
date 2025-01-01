@@ -15,3 +15,69 @@ Products are stored in PostgreSQL for robust relational data management and tran
 
 Technology used:
 Mern stack,UI/UX design, different databases nad building them from scratch,authentication,session management,sockect.io
+
+
+ACCOUNT PAGE-Paridhi,
+COLLECTION PAGE-shaurya,divyanshu	
+CONTACT PAGE-akshita,,sarthak	
+ABOUT PAGE-riya
+SELLER DASHBOARD PAGE- akshita
+LANDING PAGE -shaurya,shambhavi,aarnav
+
+
+
+You don’t need to be an expert in machine learning to integrate these features into your project, as many tools, libraries, and prebuilt models simplify the process. Here’s how much ML knowledge is typically required for each feature and how you can get started:  
+
+---
+
+### 1. **Visual Search**  
+- **Required ML Knowledge**:  
+  - Basics of image processing and deep learning concepts like Convolutional Neural Networks (CNNs).  
+- **Implementation Tips**:  
+  - Use pretrained models like ResNet or VGG (available in TensorFlow or PyTorch).  
+  - Use tools like Google Cloud Vision or AWS Rekognition for simpler integration.  
+- **Learning Path**:  
+  - Learn the basics of deep learning and image processing using libraries like TensorFlow, PyTorch, or OpenCV.  
+- **Effort Level**: Moderate if you use pretrained models; high if you build models from scratch.  
+
+---
+
+### 2. **Personalized Recommendations**  
+- **Required ML Knowledge**:  
+  - Understand collaborative filtering, content-based filtering, and recommendation systems.  
+  - Familiarity with data preprocessing and basic statistics.  
+- **Implementation Tips**:  
+  - Use libraries like Surprise or TensorFlow Recommenders.  
+  - Start with a basic recommendation algorithm (e.g., cosine similarity or matrix factorization).  
+  - Utilize user interaction data like clicks, purchases, and reviews.  
+- **Learning Path**:  
+  - Learn recommendation algorithms and basic Python for data manipulation (NumPy, Pandas).  
+- **Effort Level**: Low to Moderate if using libraries.  
+
+---
+
+### 3. **Chatbots with NLP**  
+- **Required ML Knowledge**:  
+  - Basics of natural language processing (NLP) such as tokenization, embeddings, and sequence-to-sequence models.  
+  - Optionally, understand conversational AI frameworks.  
+- **Implementation Tips**:  
+  - Start with tools like Dialogflow or Microsoft Bot Framework for simpler chatbot development.  
+  - For advanced bots, use pretrained models like OpenAI's GPT or Hugging Face's transformers.  
+  - Integrate with Socket.IO for real-time communication.  
+- **Learning Path**:  
+  - Familiarize yourself with NLP basics (tokenization, text classification).  
+  - Use libraries like NLTK, SpaCy, or Hugging Face.  
+- **Effort Level**: Low for basic chatbots using frameworks; moderate for advanced bots.  
+
+---
+
+### General Guidance  
+- Start with low-code tools or pretrained models to save time.  
+- Gradually build your ML knowledge as needed:  
+  - Learn Python basics if you’re not already familiar.  
+  - Explore introductory courses on ML platforms like Coursera, Fast.ai, or freeCodeCamp.  
+- Cloud platforms (AWS, Google Cloud, Azure) offer AI/ML APIs that can simplify integration without deep ML expertise.  
+
+---
+
+Let me know which one you’d like to tackle first, and I can guide you step by step!

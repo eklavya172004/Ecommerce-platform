@@ -1,5 +1,9 @@
 import pool from "../config/postgres.js";
+// import seller from "../models/seller.js";
+import { v2 as cloudinary } from 'cloudinary';
+import multer from 'multer'
 import Seller from "../models/seller.js";
+import { Readable } from 'stream';
 
 export const getAllProducts = async (req, res) => {
     try {
@@ -12,23 +16,61 @@ export const getAllProducts = async (req, res) => {
 }
 
 export const createProducts = async (req,res) => {
-    const {name,description,price,stock,size,category,subcategory,sellerEmail,bestsellers,topdeals} = req.body;
-    
+    const {name,description,price,stock,size,category,subcategory,sellerEmail,bestsellers,topdeals,available_discount} = req.body;
+
     try {
         const seller = await Seller.findOne({ email: sellerEmail });
+        console.log(req.body);
 
         if (!seller) {
-            return res.status(404).json({ message: "Seller not found" });
+            return res.status(404).json({ message: "Seller not found (make product using the existing sellers email)" });
           }
 
         const sellerId = seller._id.toString();
 
+        console.log(req.files);
+        const images1 = req.files.images1 && req.files.images1[0];
+        const images2 = req.files.images2 && req.files.images2[0];
+        const images3 = req.files.images3 && req.files.images3[0];
+        const images4 = req.files.images4 && req.files.images4[0];
+        const images5 = req.files.images5 && req.files.images5[0];
+        
+    // Filtering out undefined values
+    const images = [images1, images2, images3, images4, images5].filter((item) => item !== undefined);
+
+    // Uploading images to Cloudinary using buffers (not paths)
+    // const images = [images1, images2, images3, images4, images5].filter((item) => item !== undefined);
+
+    // Uploading images to Cloudinary using buffers (not paths)
+    let imageUrls = await Promise.all(
+        images.map((item) => {
+            return new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream(
+                    { resource_type: 'image' },
+                    (error, result) => {
+                        if (error) {
+                            return reject(error.message);  // Reject with error message
+                        }
+                        resolve(result.secure_url);  // Resolve with the URL of the uploaded image
+                    }
+                );
+
+                // Create a readable stream from the buffer
+                const bufferStream = Readable.from(item.buffer);
+                bufferStream.pipe(uploadStream);  // Pipe the buffer into Cloudinary
+            });
+        })
+    );
+
+    // console.log(imageUrls);
+          
+
     const query = `
-      INSERT INTO products (name, description, price, stock, size,category,sub_category,seller_id, bestsellers, topdeals)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10) RETURNING id;
+      INSERT INTO products (name, description, price, stock, size,category,sub_category,seller_id, bestsellers, topdeals,image_urls,available_discount)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9,$10,$11,$12) RETURNING id;
     `;
 
-    const values = [name,description,price,stock,size,category,subcategory,sellerId,bestsellers || false,topdeals || false];
+    const values = [name,description,price,stock,size,category,subcategory,sellerId,bestsellers || false,topdeals || false,imageUrls,available_discount || 0];
     const result = await pool.query(query, values);
 
     res.status(201).json({ message: 'Product created successfully', productId: result.rows[0].id });
@@ -71,6 +113,7 @@ export const deleteproduct = async (req,res) => {
 export const updateproduct = async (req,res) =>{
     
     const {id} = req.params;
+
     const { name,
             description,
             price,
